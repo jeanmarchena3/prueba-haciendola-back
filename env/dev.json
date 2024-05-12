@@ -1,0 +1,26 @@
+{
+    "env": "dev",
+    "port": 10000,
+    "jwt": {
+      "secret": "50rurab3425!R@qh",
+      "expirationTime": "1h"
+    },
+    "db": {
+      "host": "localhost",
+      "name": "pruebahaciendola",
+      "user": "root",
+      "password": "root",
+      "socketPath": "",
+      "port": 3306,
+      "dialect": "mysql",
+      "pool": {
+        "max": 5,
+        "min": 0,
+        "acquire": 30000,
+        "idle": 10000
+      }
+    },
+    "cors": {
+      "urls": "*"
+    }
+  }
