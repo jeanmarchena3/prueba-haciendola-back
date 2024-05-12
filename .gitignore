@@ -1,0 +1,23 @@
+# package directories
+node_modules
+jspm_packages
+
+# Serverless directories
+.serverless
+
+# IDE files
+.idea
+.vscode
+.history
+
+# Enviroments
+env
+env/
+
+# System files
+.DS_Store
+*.pdf
+
+#logs
+logs
+logs/
