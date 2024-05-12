@@ -5,6 +5,10 @@ exports.login = async (req, res) => {
   try {
     const { username = '', password = '' } = req.body;
 
+    if (!username || !password) {
+      return utils.errorResponse(res, 'FALTAN_CAMPOS_REQUERIDOS');
+    }
+
     const data = await userService.login({ username, password });
 
     utils.okResponse(res, 200, data);
@@ -23,6 +27,10 @@ exports.create = async (req, res) => {
     const {
       username = '', password = '', firstname = '', lastname = '', email = '',
     } = req.body;
+
+    if (!username || !password || !firstname || !lastname || !email) {
+      return utils.errorResponse(res, 'FALTAN_CAMPOS_REQUERIDOS');
+    }
 
     const data = await userService.create({
       username, password, firstname, lastname, email,
@@ -45,6 +53,10 @@ exports.changePassword = async (req, res) => {
 
     const { username } = req.auth;
 
+    if (!old_password || !new_password || !username) {
+      return utils.errorResponse(res, 'FALTAN_CAMPOS_REQUERIDOS');
+    }
+
     const data = await userService.changePassword({
       username, old_password, new_password,
     });
@@ -64,6 +76,10 @@ exports.verifyUsernameEmail = async (req, res) => {
   try {
     const { username = '', email = '' } = req.body;
 
+    if (!username || !email) {
+      return utils.errorResponse(res, 'FALTAN_CAMPOS_REQUERIDOS');
+    }
+
     const data = await userService.verifyUsernameEmail({ username, email });
 
     utils.okResponse(res, 200, data);
@@ -80,6 +96,10 @@ exports.verifyUsernameEmail = async (req, res) => {
 exports.changePasswordForgot = async (req, res) => {
   try {
     const { new_password: password = '', username = '' } = req.body;
+
+    if (!password || !username) {
+      return utils.errorResponse(res, 'FALTAN_CAMPOS_REQUERIDOS');
+    }
 
     const data = await userService.changePasswordForgot({
       username, password,

@@ -20,6 +20,11 @@ exports.getAll = async (req, res) => {
 exports.get = async (req, res) => {
   try {
     const { id } = req.params;
+
+    if (!id) {
+      return utils.errorResponse(res, 'FALTAN_CAMPOS_REQUERIDOS');
+    }
+
     const data = await productService.get(id);
 
     utils.okResponse(res, 200, data);
@@ -39,6 +44,12 @@ exports.create = async (req, res) => {
     const {
       handle, title, description, sku, grams, stock, price, compare_price, barcode = '',
     } = req.body;
+
+    if (!handle || !title || !description
+        || !sku || !grams || !stock || !price
+        || !compare_price || !barcode) {
+      return utils.errorResponse(res, 'FALTAN_CAMPOS_REQUERIDOS');
+    }
 
     const data = await productService.create({
       handle, title, description, sku, grams, stock, price, compare_price, barcode,
@@ -63,6 +74,12 @@ exports.update = async (req, res) => {
       handle, title, description, sku, grams, stock, price, compare_price, barcode = '',
     } = req.body;
 
+    if (!handle || !title || !description
+      || !sku || !grams || !stock || !price
+      || !compare_price || !barcode || !id) {
+      return utils.errorResponse(res, 'FALTAN_CAMPOS_REQUERIDOS');
+    }
+
     const data = await productService.update({
       id, handle, title, description, sku, grams, stock, price, compare_price, barcode,
     });
@@ -81,6 +98,11 @@ exports.update = async (req, res) => {
 exports.delete = async (req, res) => {
   try {
     const { id } = req.params;
+
+    if (!id) {
+      return utils.errorResponse(res, 'FALTAN_CAMPOS_REQUERIDOS');
+    }
+
     const data = await productService.delete(id);
 
     utils.okResponse(res, 200, data);
